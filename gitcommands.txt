@@ -34,6 +34,9 @@ Display the entire commit history using the default formatting.
 git log --oneline
 Condense each commit to a single line. 
 
+git reflog
+Show the reflog for the local repository.
+
 
 
 STASH
@@ -58,16 +61,45 @@ delete and clear stashes
 
 
 
+BRANCH
+git branch
+List all of the branches in your repository.
+
+git branch <branch>
+Create a new branch called <branch>. This does not check out the new branch.
+
+git branch -d <branch>
+git branch -D <branch> #Force delete the specified branch
+Delete the specified branch. This is a “safe” operation in that Git prevents you from deleting the branch if it has unmerged changes.
+
+git branch -m <branch>
+Rename the current branch to <branch>.
+
+git checkout -b <new-branch>
+Create and check out <new-branch>. The -b option is a convenience flag that tells Git to run git branch <new-branch> before running git checkout <new-branch>. 
+
+
+
+MERGE
+git merge <branch>
+Merge the specified branch into the current branch. Git will determine the merge algorithm automatically.
+
+
+
 CHECKOUT
 git checkout <branch>
 Return to the master branch
 
 git checkout <commit> <file>
-Check out a previous version of a file. return with ->
+Check out a previous version of a file. 
+
+return with ->
 git checkout HEAD hello.py
 
 git checkout <commit>
-Update all files in the working directory to match the specified commit. return with ->
+Update all files in the working directory to match the specified commit. 
+
+return with ->
 git checkout <branch>
 
 
@@ -110,6 +142,20 @@ The git reset --hard and git clean -f are similar
 
 
 
+REBASE
+git commit --amend
+Combine the staged changes with the previous commit and replace the previous commit with the resulting snapshot.
+
+git rebase <base>
+example :
+git checkout new-feature
+git rebase master
+git checkout master
+git merge new-feature
+Rebase the current branch onto <base>, which can be any kind of commit reference (an ID, a branch name, a tag, or a relative reference to HEAD).
+
+
+
 REMOTE
 git remote
 List the remote connections you have to other repositories.
@@ -140,3 +186,14 @@ git pull <remote> = git fetch <remote> followed by git merge origin/<current-bra
 
 git pull --rebase <remote>
 Same as the above command, but instead of using git merge to integrate the remote branch with the local one, use git rebase.
+
+
+PUSH
+git push <remote> <branch>
+Push the specified branch to <remote>, along with all of the necessary commits and internal objects.
+
+git push <remote> --all
+Push all of your local branches to the specified remote.
+
+git push <remote> --tags
+Tags are not automatically pushed when you push a branch or use the --all option. The --tags flag sends all of your local tags to the remote repository.
