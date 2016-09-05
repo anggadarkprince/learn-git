@@ -1,0 +1,142 @@
+git init
+Transform the current directory into a Git repository.
+
+git clone <repo>
+git clone <repo> <directory>
+Clone the repository located at <repo> onto the local machine.
+
+git config user.name <name>
+Define the author name to be used for all commits in the current repository.
+
+git config --global user.name <name>
+git config --global user.email <email>
+Define the author name and email to be used for all commits by the current user.
+
+git config --global alias.st status
+git config --global alias.co checkout
+etc
+Define alias of git commands
+
+git add <file/directory>
+Stage all changes in <file/directory> for the next commit.
+
+git commit
+git commit -m "<message>"
+git commit -a
+Commit a snapshot of all changes in the working directory.
+
+git status
+List which files are staged, unstaged, and untracked.
+
+git log
+Display the entire commit history using the default formatting. 
+
+git log --oneline
+Condense each commit to a single line. 
+
+
+
+STASH
+git stash / git stash save "message"
+takes your uncommitted changes (both staged and unstaged), saves them away for later use, and then reverts them from your working copy.
+
+git stash pop
+Popping your stash removes the changes from your stash and reapplies them to your working copy.
+
+git stash apply
+reapply the changes to your working copy and keep them in your stash
+
+git stash list
+view stashes list
+
+git stash show
+view a summary of a stash
+
+git stash drop stash@{1}
+git stash clear
+delete and clear stashes
+
+
+
+CHECKOUT
+git checkout <branch>
+Return to the master branch
+
+git checkout <commit> <file>
+Check out a previous version of a file. return with ->
+git checkout HEAD hello.py
+
+git checkout <commit>
+Update all files in the working directory to match the specified commit. return with ->
+git checkout <branch>
+
+
+
+REVERT 
+git revert <commit>
+Generate a new commit that undoes all of the changes introduced in <commit>, then apply it to the current branch.
+
+git revert HEAD
+Revert the commit we just created.
+
+
+
+RESET
+git reset <file>
+Remove the specified file from the staging area, but leave the working directory unchanged.
+
+git reset
+Reset the staging area to match the most recent commit, but leave the working directory unchanged.
+
+git reset --hard
+Reset the staging area and the working directory to match the most recent commit. delete changes files in working directory.
+
+git reset <commit>
+Move the current branch tip backward to <commit>, reset the staging area to match, but leave the working directory alone.
+
+git reset --hard <commit>
+Move the current branch tip backward to <commit> and reset both the staging area and the working directory to match.
+
+
+
+CLEAN
+git clean -n
+Perform a “dry run” of git clean. This will show you which files are going to be removed without actually doing it.
+
+git clean -f
+Remove untracked files from the current directory.
+
+The git reset --hard and git clean -f are similar
+
+
+
+REMOTE
+git remote
+List the remote connections you have to other repositories.
+
+git remote -v
+Same as the above command, but include the URL of each connection.
+
+git remote add <name> <url>
+Create a new connection to a remote repository. After adding a remote, you’ll be able to use <name> as a convenient shortcut for <url> in other Git commands.
+
+git remote rm <name>
+Remove the connection to the remote repository called <name>.
+
+git remote rename <old-name> <new-name>
+Rename a remote connection from <old-name> to <new-name>.
+
+
+
+FETCH
+git fetch
+Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository.
+
+git fetch <remote> <branch>
+Same as the above command, but only fetch the specified branch.
+
+git pull = git fetch + git merge
+git pull <remote> = git fetch <remote> followed by git merge origin/<current-branch>.
+
+git pull --rebase <remote>
+Same as the above command, but instead of using git merge to integrate the remote branch with the local one, use git rebase.
