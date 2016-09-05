@@ -1,3 +1,3 @@
-Created by angga ari wijaya
-simple html portfolio
-version 1.0
+Created by Angga Ari Wijaya
+Simple HTML Portfolio
+version 1.0 2016
