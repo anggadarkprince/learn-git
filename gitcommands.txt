@@ -70,7 +70,7 @@ Create a new branch called <branch>. This does not check out the new branch.
 
 git branch -d <branch>
 git branch -D <branch> #Force delete the specified branch
-Delete the specified branch. This is a ìsafeî operation in that Git prevents you from deleting the branch if it has unmerged changes.
+Delete the specified branch. This is a ‚Äúsafe‚Äù operation in that Git prevents you from deleting the branch if it has unmerged changes.
 
 git branch -m <branch>
 Rename the current branch to <branch>.
@@ -137,13 +137,17 @@ Move the current branch tip backward to <commit> and reset both the staging area
 
 CLEAN
 git clean -n
-Perform a ìdry runî of git clean. This will show you which files are going to be removed without actually doing it.
+Perform a ‚Äúdry run‚Äù of git clean. This will show you which files are going to be removed without actually doing it.
 
 git clean -f
 Remove untracked files from the current directory.
-
 The git reset --hard and git clean -f are similar
 
+git clean -fd
+remove untracked files and directories
+
+git clean -fdx
+remove ignored and untracked files and directories
 
 
 REBASE
@@ -168,7 +172,7 @@ git remote -v
 Same as the above command, but include the URL of each connection.
 
 git remote add <name> <url>
-Create a new connection to a remote repository. After adding a remote, youíll be able to use <name> as a convenient shortcut for <url> in other Git commands.
+Create a new connection to a remote repository. After adding a remote, you‚Äôll be able to use <name> as a convenient shortcut for <url> in other Git commands.
 
 git remote rm <name>
 Remove the connection to the remote repository called <name>.
