@@ -205,3 +205,11 @@ Push all of your local branches to the specified remote.
 
 git push <remote> --tags
 Tags are not automatically pushed when you push a branch or use the --all option. The --tags flag sends all of your local tags to the remote repository.
+
+
+DIFFERENCE
+git diff
+See changes on working directory against HEAD
+
+git diff --cached
+See changes staged files againts HEAD
