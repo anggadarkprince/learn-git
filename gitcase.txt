@@ -1,0 +1,6 @@
+-- Undo the effects of 'git rm ' or 'rm ', changes of the file followed by 'git add -A'
+# this restores the file status in the index
+git reset -- <file>
+
+# then check out a copy from the index
+git checkout -- <file>
