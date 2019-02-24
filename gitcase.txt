@@ -4,3 +4,7 @@ git reset -- <file>
 
 # then check out a copy from the index
 git checkout -- <file>
+
+# This will undo the commit and restore the index to the state it was in before that commit, 
+# leaving the working directory with the changes uncommitted
+git reset HEAD^
