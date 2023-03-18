@@ -32,10 +32,14 @@ git log
 Display the entire commit history using the default formatting. 
 
 git log --oneline
+git log --oneline --graph
 Condense each commit to a single line. 
 
 git reflog
 Show the reflog for the local repository.
+
+git show <hash>
+show detail of commit
 
 
 
@@ -62,7 +66,7 @@ delete and clear stashes
 
 
 BRANCH
-git branch
+git branch <--show-current>
 List all of the branches in your repository.
 
 git branch <branch>
@@ -88,37 +92,42 @@ Merge the specified branch into the current branch. Git will determine the merge
 
 CHECKOUT
 git checkout <branch>
-Return to the master branch
-
-git checkout <commit> <file>
-Check out a previous version of a file. 
-
-return with ->
-git checkout HEAD hello.py
+Move into branch or return to the most recent commint in the branch
 
 git checkout <commit>
 Update all files in the working directory to match the specified commit. 
+  can return with -> git checkout <branch/HEAD>
 
-return with ->
-git checkout <branch>
+git checkout <commit> <file>
+Check out a previous version of a file and move the changes into staging area. 
+  can return with -> git checkout <branch/HEAD> <file>
 
-return to specific commit of specific file
+example return to specific commit of specific file
 git checkout HEAD -- my-file.txt
 git checkout 08f35f8 -- my-file.txt
 
+git checkout <tag>
+Checking out by tags
+
+
+
+RESTORE
+git restore file.txt
+git restore --staged file.txt
+restore changed / deleted of file
 
 
 REVERT 
 git revert <commit>
 Generate a new commit that undoes all of the changes introduced in <commit>, then apply it to the current branch.
+<commit> not the hash will result to be, but pick commit to be undone
 
 git revert HEAD
 Revert the commit we just created.
 
 
-
 RESET
-git reset <file>
+git reset [--staged] <file>
 Remove the specified file from the staging area, but leave the working directory unchanged.
 
 git reset
@@ -127,8 +136,12 @@ Reset the staging area to match the most recent commit, but leave the working di
 git reset --hard
 Reset the staging area and the working directory to match the most recent commit. delete changes files in working directory.
 
-git reset <commit>
+git reset [mode:--soft,--mixed (default),--hard] <commit>
 Move the current branch tip backward to <commit>, reset the staging area to match, but leave the working directory alone.
+after reset allow to move forward, before new commit created (will override the commit ahead)
+
+git reset --soft <commit>
+Move the current branch tip backward to <commit> and leave both the staging area and the working directory alone.
 
 git reset --hard <commit>
 Move the current branch tip backward to <commit> and reset both the staging area and the working directory to match.
@@ -155,13 +168,17 @@ git commit --amend
 Combine the staged changes with the previous commit and replace the previous commit with the resulting snapshot.
 
 git rebase <base>
+git pull --rebase --autostash
 example :
 git checkout new-feature
 git rebase master
 git checkout master
 git merge new-feature
-Rebase the current branch onto <base>, which can be any kind of commit reference (an ID, a branch name, a tag, or a relative reference to HEAD).
+Rebase the current branch onto <base> (repeat commit one by one can prevent merge commit), which can be any kind of commit reference (an ID, a branch name, a tag, or a relative reference to HEAD).
 
+git config --global pull.rebase true
+git config --global rebase.autostash true
+Set default pull to rebase option
 
 
 REMOTE
@@ -179,6 +196,9 @@ Remove the connection to the remote repository called <name>.
 
 git remote rename <old-name> <new-name>
 Rename a remote connection from <old-name> to <new-name>.
+
+git remote prune <remote>
+Prune stalled ref branch from remote that not exist anymore
 
 
 
@@ -206,6 +226,12 @@ Push all of your local branches to the specified remote.
 git push <remote> --tags
 Tags are not automatically pushed when you push a branch or use the --all option. The --tags flag sends all of your local tags to the remote repository.
 
+git push -d <origin> <branch>
+Delete branch on remote
+
+git push -d <origin> <tagname>
+Delete tag on remote
+
 
 DIFFERENCE
 git diff
@@ -213,3 +239,27 @@ See changes on working directory against HEAD
 
 git diff --cached
 See changes staged files againts HEAD
+
+git diff <hash1> <hash2>
+See changes from a snapshot to another snapshot
+
+BLAME
+git blame <file>
+See user that make changes of the file
+
+TAGGING
+git tag
+Listing commit that marked
+
+git tag -a v1.4 -m "my version 1.4"
+Create new tag
+
+git show v1.4
+Show commit by tag
+
+git tag -a v1.2 9fceb02
+Tag passed commit by given reference
+
+git tag -d v1.4
+Delete existing tag
+
